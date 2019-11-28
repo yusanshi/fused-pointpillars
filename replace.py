@@ -22,3 +22,5 @@ else:
                                         os.environ['KITTI_DATASET_ROOT'])
             with open(x, 'w', encoding='utf-8') as f:
                 f.write(text)
+
+            print('Finish replacement for {}'.format(x))
