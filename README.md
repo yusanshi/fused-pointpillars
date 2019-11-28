@@ -88,7 +88,13 @@ apt upgrade
 apt install vim git curl wget build-essential python3 python3-pip
 pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
 python3 -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-python3 -m pip install torch torchvision scikit-image scipy numba pillow matplotlib fire tensorboardX protobuf opencv-python --default-timeout=100
+python3 -m pip install torch torchvision scikit-image scipy numba pillow matplotlib fire tensorboardX protobuf opencv-python shapely pybind11 --default-timeout=100
+
+# Install SparseConvNet
+git clone https://github.com/facebookresearch/SparseConvNet
+cd SparseConvNet/
+vim develop.sh # Change python to python3
+bash develop.sh
 ```
 
 > Since you have modified the container a lot, you may want to save it to a new image for future use. To do this, please google the usage of `docker commit`. Then next time you want to run this, just replace `nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04` with the new name.
