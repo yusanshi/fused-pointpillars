@@ -105,9 +105,10 @@ def train(config_path,
     config_file_bkp = "pipeline.config"
     config = pipeline_pb2.TrainEvalPipelineConfig()
     with open(config_path, "r") as f:
-        proto_str = f.read()
+        proto_str = os.path.expandvars(f.read())
         text_format.Merge(proto_str, config)
-    shutil.copyfile(config_path, str(model_dir / config_file_bkp))
+	with open(str(model_dir / config_file_bkp), 'w') as f:
+		f.write(proto_str)
     input_cfg = config.train_input_reader
     eval_input_cfg = config.eval_input_reader
     model_cfg = config.model.second
@@ -567,7 +568,7 @@ def evaluate(config_path,
         result_path = pathlib.Path(result_path)
     config = pipeline_pb2.TrainEvalPipelineConfig()
     with open(config_path, "r") as f:
-        proto_str = f.read()
+        proto_str = os.path.expandvars(f.read())
         text_format.Merge(proto_str, config)
 
     input_cfg = config.eval_input_reader

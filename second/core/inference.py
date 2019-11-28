@@ -1,6 +1,7 @@
 import abc
 import contextlib
 
+import os
 import numpy as np
 from google.protobuf import text_format
 
@@ -71,7 +72,7 @@ class InferenceContext:
     def get_config(self, path):
         config = pipeline_pb2.TrainEvalPipelineConfig()
         with open(path, "r") as f:
-            proto_str = f.read()
+            proto_str = os.path.expandvars(f.read())
             text_format.Merge(proto_str, config)
         return config
 

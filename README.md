@@ -8,7 +8,7 @@ Trying to modify [PointPillars](https://arxiv.org/abs/1812.05784) to use images 
 
 ### Clone this project
 Choose a directory to clone the project.
-```
+```bash
 git clone git@github.com:yusanshi/fused_pointpillars.git
 ```
 
@@ -22,7 +22,7 @@ https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_velodyne.zip
 ```
 
 Use wget for example (Use -c or --continue option to enable resuming from break-point).
-```
+```bash
 cd KITTI_DATASET_ROOT
 wget --continue https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_calib.zip \
 https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_image_2.zip \
@@ -31,13 +31,13 @@ https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_velodyne.zip
 ```
 
 Extract them.
-```
+```bash
 sudo apt install unzip
 unzip 'data_object_*.zip' -q -d object_detection/
 ```
 This will generate `training` and `testing` directories in `KITTI_DATASET_ROOT/object_detection`.
 You can use tree command to check the result.
-```
+```bash
 sudo apt install tree
 tree -L 3
 ```
@@ -61,14 +61,14 @@ Your output should be something like this:
 ```
 
 Create some empty directories.
-```
+```bash
 mkdir object_detection/training/velodyne_reduced
 mkdir object_detection/testing/velodyne_reduced
 ```
 
 ### Use Docker image
 In Docker, a running instance of an image is a container. We will use image `nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04` from Cuda official images.
-```
+```bash
 docker run -it --rm --gpus all nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04 bash
 ```
 In above command, `--gpus all` tells docker to use all your GPU resources. `nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04` is the image name on which the container will be created. `bash` is the command to execute after loading of the container.
@@ -76,13 +76,13 @@ In above command, `--gpus all` tells docker to use all your GPU resources. `nvid
 However, you can't access files on host machine using above command. In order to access your code and Kitti dataset files, use `-v` parameter to map `fused_pointpillars` and `KITTI_DATASET_ROOT` into your container.
 
 For example, map `~/fused_pointpillars` on host machine into `/fused_pointpillars` in container.
-```
+```bash
 docker run -it --rm --gpus all -v ~/fused_pointpillars:/fused_pointpillars nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04 bash
 ```
 You will add two `-v` since both this project and KITTI dataset are mapped.
 
 ### Install necessory packages
-```
+```bash
 apt update
 apt upgrade
 apt install vim git curl wget build-essential python3 python3-pip
@@ -101,34 +101,25 @@ bash develop.sh
 
 ### Set environment variables
 In `env.sh`, set `PYTHONPATH` to this project's directory, `KITTI_DATASET_ROOT` to KITTI dataset directory. Here you will use paths in Docker container (mapped path) instead of those in your host machine.
-```
+```bash
 vim env.sh
 ```
 After this, source it.
-```
+```bash
 source env.sh
 ```
 
 ### Prepare KITTI dataset
-```
+```bash
 cd $PYTHONPATH/second
 python3 create_data.py create_kitti_info_file --data_path=$KITTI_DATASET_ROOT/object_detection
 python3 create_data.py create_reduced_point_cloud --data_path=$KITTI_DATASET_ROOT/object_detection
 python3 create_data.py create_groundtruth_database --data_path=$KITTI_DATASET_ROOT/object_detection
 ```
 
-### Modify path in config files
-
-The config files in `$PYTHONPATH/second/configs` need to  be edited to point to the KITTI dataset directory. To do this, use `replace.py` to replace string `$KITTI_DATASET_ROOT` with value of current environment variable `KITTI_DATASET_ROOT`.
-
-```
-cd $PYTHONPATH
-python3 replace.py
-```
-
 ### Train
 
-```
+```bash
 cd $PYTHONPATH/second
 python3 ./pytorch/train.py train --config_path=./configs/pointpillars/car/xyres_16.proto --model_dir=./model
 ```
@@ -136,7 +127,7 @@ You can change `config_path` to other config files in `./configs/pointpillars`. 
 
 ### Evaluate
 
-```
+```bash
 cd $PYTHONPATH/second
 python3 ./pytorch/train.py evaluate --config_path=./configs/pointpillars/car/xyres_16.proto --model_dir=./model
 ```

@@ -133,7 +133,7 @@ class Settings:
                 f.write(json.dumps(self._settings, indent=2, sort_keys=True))
         else:
             with open(self._cfg_path, 'r') as f:
-                self._settings = json.loads(f.read())
+                self._settings = json.loads(os.path.expandvars(f.read()))
 
     def set(self, name, value):
         self._settings[name] = value
@@ -153,7 +153,7 @@ class Settings:
 
     def load(self, path):
         with open(self._cfg_path, 'r') as f:
-            self._settings = json.loads(f.read())
+            self._settings = json.loads(os.path.expandvars(f.read()))
 
 
 def _riou3d_shapely(rbboxes1, rbboxes2):
