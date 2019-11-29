@@ -1,6 +1,6 @@
 # Fused PointPillars
 
-> Credits: I duplicated [nutonomy/second.pytorch](https://github.com/traveller59/second.pytorch) instead of forking it for some reasons. So only commits after the first is my work. Actually this can be seen as a fork of [nutonomy/second.pytorch](https://github.com/traveller59/second.pytorch) which is a fork of [traveller59/second.pytorch](https://github.com/traveller59/second.pytorch).
+> Credits: I duplicated [nutonomy/second.pytorch](https://github.com/nutonomy/second.pytorch) instead of forking it for some reasons. So only commits after the first is my work. Actually this can be seen as a fork of [nutonomy/second.pytorch](https://github.com/nutonomy/second.pytorch) which is a fork of [traveller59/second.pytorch](https://github.com/traveller59/second.pytorch).
 
 Trying to modify [PointPillars](https://arxiv.org/abs/1812.05784) to use images for sensor fusion. Still working on it. The following is for original PointPillars.
 
