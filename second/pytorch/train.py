@@ -107,8 +107,8 @@ def train(config_path,
     with open(config_path, "r") as f:
         proto_str = os.path.expandvars(f.read())
         text_format.Merge(proto_str, config)
-	with open(str(model_dir / config_file_bkp), 'w') as f:
-		f.write(proto_str)
+    with open(str(model_dir / config_file_bkp), 'w') as f:
+        f.write(proto_str)
     input_cfg = config.train_input_reader
     eval_input_cfg = config.eval_input_reader
     model_cfg = config.model.second
