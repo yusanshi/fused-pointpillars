@@ -77,7 +77,7 @@ def example_convert_to_torch(example, dtype=torch.float32,
                 v, dtype=torch.int32, device=device)
         elif k in ["anchors_mask"]:
             example_torch[k] = torch.as_tensor(
-                v, dtype=torch.uint8, device=device)
+                v, dtype=torch.bool, device=device)
         else:
             example_torch[k] = v
     return example_torch
