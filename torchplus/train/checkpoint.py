@@ -93,7 +93,7 @@ def save(model_dir,
         for ckpt in all_ckpts:
             ckpt_path_uncheck = Path(model_dir) / ckpt
             if ckpt_path_uncheck.is_file():
-                all_ckpts_checked.append(str(ckpt_path_uncheck))
+                all_ckpts_checked.append(ckpt)
         all_ckpts = all_ckpts_checked
         if len(all_ckpts) > max_to_keep:
             if keep_latest:

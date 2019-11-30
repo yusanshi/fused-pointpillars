@@ -97,7 +97,17 @@ vim develop.sh # Change python to python3
 bash develop.sh
 ```
 
-> Since you have modified the container a lot, you may want to save it to a new image for future use. To do this, please google the usage of `docker commit`. Then next time you want to run this, just replace `nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04` with the new name.
+Since you have modified the container a lot, you may want to save it to a new image for future use. 
+
+```bash
+# In your host machine, not in the container
+
+# Get container ID
+docker ps
+docker commit <container_id> <name>
+```
+
+Then next time you want to run this, just replace `nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04` with the new name.
 
 ### Set environment variables
 In `env.sh`, set `PYTHONPATH` to this project's directory, `KITTI_DATASET_ROOT` to KITTI dataset directory. Here you will use paths in Docker container (mapped path) instead of those in your host machine.
@@ -131,5 +141,5 @@ You can change `config_path` to other config files in `./configs/pointpillars`. 
 cd $PYTHONPATH/second
 python3 ./pytorch/train.py evaluate --config_path=./configs/pointpillars/car/xyres_16.proto --model_dir=./model
 ```
-Result will saved in `model_dir/eval_results/step_xxx`.
+Results will be saved in `model_dir/eval_results/step_xxx`.
 
