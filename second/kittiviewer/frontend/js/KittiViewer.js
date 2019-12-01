@@ -50,8 +50,12 @@ KittiViewer.prototype = {
         let data = {};
         data["root_path"] = this.rootPath;
         data["info_path"] = this.infoPath;
+        var backend_url = this.addhttp(this.backend);
+        if (backend_url.endsWith('/')) {
+            backend_url = backend_url.substring(0, backend_url.length-1)
+        }
         return $.ajax({
-            url: this.addhttp(this.backend) + '/api/readinfo',
+            url: backend_url + '/api/readinfo',
             method: 'POST',
             contentType: "application/json",
             data: JSON.stringify(data),

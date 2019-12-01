@@ -308,6 +308,10 @@ def inference_by_idx():
     response.headers['Access-Control-Allow-Headers'] = '*'
     return response
 
+@app.route('/', methods=['GET'])
+def hello():
+    return "Backend is running..."
+
 
 def main(port=16666):
     app.run(host='0.0.0.0', threaded=True, port=port)
