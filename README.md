@@ -9,7 +9,7 @@ Trying to modify [PointPillars](https://arxiv.org/abs/1812.05784) to use images 
 ### Clone this project
 Choose a directory to clone the project.
 ```bash
-git clone git@github.com:yusanshi/fused_pointpillars.git
+git clone git@github.com:yusanshi/fused-pointpillars.git
 ```
 
 ### Download KITTI dataset
@@ -73,11 +73,11 @@ docker run -it --rm --gpus all nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04 bash
 ```
 In above command, `--gpus all` tells docker to use all your GPU resources. `nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04` is the image name on which the container will be created. `bash` is the command to execute after loading of the container.
 
-However, you can't access files on host machine using above command. In order to access your code and Kitti dataset files, use `-v` parameter to map `fused_pointpillars` and `KITTI_DATASET_ROOT` into your container.
+However, you can't access files on host machine using above command. In order to access your code and Kitti dataset files, use `-v` parameter to map `fused-pointpillars` and `KITTI_DATASET_ROOT` into your container.
 
-For example, map `~/fused_pointpillars` on host machine into `/fused_pointpillars` in container.
+For example, map `~/fused-pointpillars` on host machine into `/fused-pointpillars` in container.
 ```bash
-docker run -it --rm --gpus all -v ~/fused_pointpillars:/fused_pointpillars nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04 bash
+docker run -it --rm --gpus all -v ~/fused-pointpillars:/fused-pointpillars nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04 bash
 ```
 You will add two `-v` since both this project and KITTI dataset are mapped.
 
