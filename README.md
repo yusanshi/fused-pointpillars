@@ -1,3 +1,7 @@
+***Sorry but the project is abandoned and archived.***
+
+---
+
 # Fused PointPillars
 
 > Credits: I duplicated [nutonomy/second.pytorch](https://github.com/nutonomy/second.pytorch) instead of forking it for some reasons. So only commits after the first is my work. Actually this can be seen as a fork of [nutonomy/second.pytorch](https://github.com/nutonomy/second.pytorch) which is a fork of [traveller59/second.pytorch](https://github.com/traveller59/second.pytorch).
